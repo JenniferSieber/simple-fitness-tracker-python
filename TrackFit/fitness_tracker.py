@@ -5,7 +5,6 @@ emojis = ['🚶', '🧗‍♀️', '🤩', '🏃‍♀️', '🏊‍♀️', '�
 
 class Workout(object) :
     cal_per_hr = 200 
-
     def __init__(self, start, end, calories=None) :
         self.start = parser.parse(start)
         self.end = parser.parse(end)
@@ -13,7 +12,6 @@ class Workout(object) :
         self.icon = emojis[2][0]
         self.kind = 'Workout'
 
-    # getters
     def get_duration(self) :
         return self.end - self.start  
     
@@ -38,11 +36,12 @@ class Workout(object) :
     def get_kind(self) :
         return self.kind
         
-    # setters
     def set_calories(self, calories) :
         self.calories = calories
+        
     def set_start(self, start) :
         self.start = start
+        
     def set_end(self, end) :
         self.end = end
 
@@ -101,9 +100,8 @@ class RunWorkout(Workout) :
             return dist * RunWorkout.cals_per_km
         else :
             return super().get_calories()
-    # Override Parent in modular way.
-    def __eq__(self, other):
-        """Returns true if this workout is equal to another workout, false o.w."""
+    # Override Parent 
+    def __eq__(self, other) :
         return super().__eq__(other) and self.elev == other.elev
         
 class WalkWorkout(Workout) :
