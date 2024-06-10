@@ -100,12 +100,12 @@ class RunWorkout(Workout) :
             return dist * RunWorkout.cals_per_km
         else :
             return super().get_calories()
+            
     # Override Parent 
     def __eq__(self, other) :
         return super().__eq__(other) and self.elev == other.elev
         
 class WalkWorkout(Workout) :
-    
     def __init__(self, start, end, elev=0, calories=None) :
         super().__init__(start, end, calories) 
         self.icon = emojis[0][0]
@@ -119,7 +119,6 @@ class WalkWorkout(Workout) :
         self.elev = e
 
 class HikeWorkout(Workout) :
-    
     def __init__(self, start, end, elev=0, calories=None) :
         super().__init__(start, end, calories) 
         self.icon = emojis[1][0]
@@ -132,36 +131,27 @@ class HikeWorkout(Workout) :
     def set_elevation(self, e) :
         self.elev = e
 
-class SwimWorkout(Workout):
-    """Subclass of workout to representing swimming"""
+class SwimWorkout(Workout) :
     # redefine class variable cal_per_hr
     cal_per_hr = 400
     
-    def __init__(self, start, end, pace, calories=None):
-        """Create a new instance of a swimming workout, where start and
-        end are strings representing the start and end time of the workout,
-        and pace is the pace of the workout in min/100yd, and calories
-        is an optional parameter specifying the calories burned in the workout
-        """
+    def __init__(self, start, end, pace, calories=None) :
         super().__init__(start,end,calories)
         self.icon = emojis[4][0]
         self.kind = 'Swimming'
         self.pace = pace
 
-    def get_pace(self):
-        """Return the pace of the workout"""
+    def get_pace(self) :
         return self.pace
     
-    def get_calories(self):
-        """Return the total calories burned in the swim workout
-           using the SwimWorkout cal_per_hr class variable"""
+    def get_calories(self) :
         if (self.calories == None):
             return SwimWorkout.cal_per_hr * (self.end - self.start).total_seconds() / 3600.0
         else:
             return self.calories
 
 # Helper functions for totalled values: calories and elevation
-def total_calories(workouts):
+def total_calories(workouts) :
     cals = 0
     for w in workouts:
       cals += w.get_calories()
@@ -169,11 +159,10 @@ def total_calories(workouts):
     cals_str = F'🤩 Calories: {cals:.0f}'
     return cals_str
 
-def total_elevation(run_workouts):
+def total_elevation(run_workouts) :
     elev = 0
     for w in run_workouts:
       elev += w.get_elevation()
-    #return elev
     elev_str = F'🤩 Elevation: {elev}'
     return elev_str
 
