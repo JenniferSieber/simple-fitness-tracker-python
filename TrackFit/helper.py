@@ -1,6 +1,4 @@
-#################
 ## HELPER FUNCTION: get the distance between two points
-#################
 from math import sin, cos, sqrt, atan2, radians
 
 def gpsDistance(p1,p2):
